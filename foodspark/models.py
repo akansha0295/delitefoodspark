@@ -38,7 +38,7 @@ class Restaurant(models.Model):
 	def make_password(self ,password):
 		assert password
 		hashedpassword = hashlib.md5(password).hexdigest()
-		return hashedpassword
+		return self.hashedpassword
 	def check_password(self, password):
 		assert password
 		hashed = hashlib.md5(password).hexdigest()
@@ -57,12 +57,12 @@ class Customer(models.Model):
 	phone = models.CharField(validators=[phone_regex],max_length=15,blank = True)
 	def make_password(self ,password):
 		assert password
-		hashedpassword = hashlib.md5(password.encode('utf-8')).hexdigest()
-		return hashedpassword
+		#hashedpassword = hashlib.md5(password.encode('utf-8')).hexdigest()
+		return self.password
 	def check_password(self, password):
 		assert password
-		hashed = hashlib.md5(password).hexdigest()
-		return self.password == hashed
+		#hashed = hashlib.md5(password).hexdigest()
+		return self.password == password
 	def set_password(self, password):
 		self.password = password
 
